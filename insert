@@ -1,0 +1,15 @@
+<?php
+try {
+    $bdd = new PDO('mysql:host=localhost;dbname=monitor', 'root', '');
+    $mail = $_GET['mail'];
+    $password = $_GET['password'];
+
+    $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $sql = "INSERT INTO login (mail, password) VALUES ('$mail', '$password')";
+    $bdd->exec($sql);
+    header("location: monitor.html");
+} catch (PDOException $e) {
+    echo $sql . "<br>" . $e->getMessage();
+}
+$bdd = null;
+?>
